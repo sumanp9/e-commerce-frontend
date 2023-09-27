@@ -19,6 +19,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component'; 
+import { AuthGuardService } from './auth/auth-guard.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
      AppRoutingModule,
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
