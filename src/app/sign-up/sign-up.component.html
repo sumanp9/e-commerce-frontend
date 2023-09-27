@@ -1,0 +1,41 @@
+
+<h2 mat-dialog-title>Create Account</h2>
+<div mat-dialog-content>
+ <form>
+    <p>
+    <mat-form-field>
+        <mat-label>Name:</mat-label>
+        <input matInput [(ngModel)]="this.user.name" name="username" required>
+    </mat-form-field>
+    </p>
+    <p>
+    <mat-form-field>
+        <mat-label>Email Address:</mat-label>
+        <input matInput [(ngModel)]="this.user.email" name="email" type="email" required>
+    </mat-form-field>
+    </p>
+    <p>
+    <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="this.user.password" 
+        [type]="hide ? 'password' : 'text'"
+        password required name="passwordForm"
+        name="password" required>
+        <button matSuffix mat-icon-button (click)="this.togglePasswordVisibility()">
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        </mat-form-field>
+    </p>
+    <p>
+    <mat-form-field>
+        <mat-label>Phone Number:</mat-label>
+        <input matInput [(ngModel)]="this.user.phone" name="phoneNumber" required>
+    </mat-form-field>
+    </p>
+    <button mat-raised-button [disabled]="this.disableSave()"
+     (click)="this.createAccount()">
+     save</button>
+    
+ </form>
+
+</div>

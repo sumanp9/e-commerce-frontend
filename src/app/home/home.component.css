@@ -1,0 +1,21 @@
+.example-container {
+    margin-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  .form-field, .button {
+    margin-bottom: 10px;
+  }
+  
+  .example-form {
+    min-width: 50%;
+    max-width: 200px;
+    width: 100%;
+  }
+  
+
+  .example-full-width {
+    width: 100%;
+  }
