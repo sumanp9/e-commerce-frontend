@@ -1,5 +1,3 @@
-export interface ShopInterface {
-}
 export interface PersonInterface{
     name: string,
     email: string, 
@@ -12,4 +10,13 @@ export interface UserInfo{
     name: string, 
     email: string, 
     role: string
+}
+
+export interface ProductInfo{
+    id: number,
+    name:string, 
+    description:string, 
+    detail:string, 
+    price: number,
+    quantity: number
 }

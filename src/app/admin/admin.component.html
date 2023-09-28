@@ -1,1 +1,29 @@
-<mat-toolbar>Welcome Admin</mat-toolbar>
+<mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+      <span>Welcome</span>
+      <button mat-raised-button  (click)="this.logOut()">Logout</button>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <button mat-button (click)="this.getUsers()">Users</button>
+      <button mat-button (click)="this.getProducts()">Products</button>      
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div>
+    <h1>Users</h1>
+
+    <mat-list role="list" *ngFor="let user of userList">
+        <mat-list-item role="listitem">{{user.name}}</mat-list-item>
+    </mat-list>
+</div>
+
+<div>
+    <h1>Products <button mat-flat-button (click)="this.addProduct()"> <mat-icon>add</mat-icon></button></h1>
+    <div class="card-container" *ngFor="let product of productList">
+        <mat-card class="example-card">
+            <mat-card-header>{{product.name}}</mat-card-header>
+            <mat-card-content>{{product.description}}</mat-card-content>
+            <mat-card-footer>${{product.price}}</mat-card-footer>
+        </mat-card>
+</div> 
+</div>

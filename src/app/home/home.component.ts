@@ -34,7 +34,7 @@ export class HomeComponent {
      this.signedUser = res.user;
      if(this.signedUser.role === 'Admin') {
       localStorage.setItem('signedUser', JSON.stringify(this.signedUser)); 
-      this.router.navigate(['/admin'],  {state: this.signedUser})
+      this.router.navigate(['/admin'],  {state:{data: this.signedUser}})
     } else {
         
      }
