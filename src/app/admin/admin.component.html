@@ -9,7 +9,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <div>
+  <div *ngIf="displayUsers">
     <h1>Users</h1>
 
     <mat-list role="list" *ngFor="let user of userList">
@@ -17,7 +17,7 @@
     </mat-list>
 </div>
 
-<div>
+<div *ngIf="this.displayProducts"> 
     <h1>Products <button mat-flat-button (click)="this.addProduct()"> <mat-icon>add</mat-icon></button></h1>
     <div class="card-container" *ngFor="let product of productList">
         <mat-card class="example-card">

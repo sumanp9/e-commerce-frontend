@@ -22,6 +22,9 @@ export class AdminComponent {
   userList: UserInfo[] =[];
   productList: ProductInfo[] =[];
 
+  displayUsers = false;
+  displayProducts = false;
+
   constructor(
     private router: Router,
     public service: ShopService,
@@ -35,6 +38,8 @@ export class AdminComponent {
   }
 
   getUsers(): void{
+    this.displayUsers = true;
+    this.displayProducts = false;
     this.service.users().subscribe((result) => {
       this.userList = result;
       console.log(this.userList)
@@ -42,6 +47,8 @@ export class AdminComponent {
   }
 
   getProducts(): void{
+    this.displayProducts = true;
+    this.displayUsers = false;
     this.service.products().subscribe((result) => {
       this.productList = result;
 
