@@ -5,6 +5,7 @@ import { ShopService } from '../service/shop.service';
 import { UserInfo } from '../shop-interface';
 import { Router } from '@angular/router';
 import { AdminComponent } from '../admin/admin.component';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +37,8 @@ export class HomeComponent {
       localStorage.setItem('signedUser', JSON.stringify(this.signedUser)); 
       this.router.navigate(['/admin'],  {state:{data: this.signedUser}})
     } else {
-        
+      console.log('This is a User')
+        this.userPage(this.signedUser);
      }
     });
     
@@ -47,6 +49,11 @@ export class HomeComponent {
     this.dialog.open(SignUpComponent).afterClosed().subscribe((res) => {
       this.router.navigateByUrl('/user-home');
     });
+  }
+
+  userPage(user: UserInfo): void {
+    localStorage.setItem('signedUser', JSON.stringify(user)); 
+    this.router.navigate(['/user-home'] , {state: {data: user}})
   }
 
   togglePasswordVisibility(): void{

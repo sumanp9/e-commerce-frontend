@@ -1,0 +1,38 @@
+ <mat-toolbar color="primary">
+    <span>Welcome to our Plant Shop {{this.signedUser.name}}</span>
+    <span class="spacer"></span>
+    <div>
+        <button mat-icon-button  matTooltip="Cart">
+            <mat-icon>
+                shopping_cart
+                </mat-icon>
+        </button>
+        <button mat-icon-button  matTooltip="Logout" (click)="this.logOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<p></p>
+<div>
+    <mat-grid-list cols="4" rowHeight="200px" >
+        <mat-grid-tile *ngFor="let product of productList">
+            <mat-card class="product-card" (click)="onCardClick(product.id)">
+                <mat-card-header>
+                  <b>{{product.name}}</b>
+                </mat-card-header>
+                <mat-card-content>
+                    {{product.description}}
+                </mat-card-content>
+                <mat-card-actions>
+                    <span>{{product.price}}</span>
+                    <button mat-icon-button>
+                    <mat-icon>add</mat-icon>    
+                    </button>
+                  </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      
+</div>
+

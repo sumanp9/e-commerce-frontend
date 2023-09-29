@@ -12,7 +12,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {HttpClientModule} from '@angular/common/http';
 import {MatListModule} from '@angular/material/list'; 
-import {MatCardModule} from '@angular/material/card'; 
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';  
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -22,6 +24,7 @@ import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component'; 
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AddProductComponent } from './add-product/add-product.component';
+import { UserHomeComponent } from './user-home/user-home.component';
 
 
 
@@ -32,7 +35,8 @@ import { AddProductComponent } from './add-product/add-product.component';
     AdminComponent,
     TestComponent,
     HomeComponent,
-    AddProductComponent
+    AddProductComponent,
+    UserHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,8 @@ import { AddProductComponent } from './add-product/add-product.component';
     HttpClientModule,
     MatListModule,
     MatCardModule,
+    MatGridListModule,
+    MatTooltipModule,
 
     BrowserAnimationsModule,
      AppRoutingModule,
