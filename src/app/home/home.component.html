@@ -8,8 +8,8 @@
       <div class="example-container">
         <form class="example-form">
           <mat-form-field class="example-full-width">
-            <mat-label>Enter your email</mat-label>
-            <input matInput type= "email" [(ngModel)]="this.email"  required name="emailForm">
+            <mat-label>Username</mat-label>
+            <input matInput type= "email" [(ngModel)]="this.username"  required name="usernameForm">
           </mat-form-field>
         
           <mat-form-field class="example-full-width">
@@ -22,7 +22,7 @@
               </button>
           </mat-form-field>
           
-          <button mat-raised-button class="button" [disabled]="this.disabledLogin(this.email, this.password)" 
+          <button mat-raised-button class="button" [disabled]="this.disabledLogin(this.username, this.password)" 
           (click)="this.signIn()">Continue</button>
             <button mat-raised-button class="button" (click)="this.createAccount()">Create Account</button>
         </form>

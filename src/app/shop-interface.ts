@@ -1,5 +1,7 @@
 export interface PersonInterface{
     name: string,
+    user_name: string,
+    address: string,
     email: string, 
     password: string,
     phone: string

@@ -27,6 +27,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { AddProductComponent } from './add-product/add-product.component';
 import {Product} from './product/product'
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { PasswordVerificationComponent } from './password-verification/password-verification.component';
 
 
 
@@ -40,6 +41,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     AddProductComponent,
     Product,
     ProductDetailComponent,
+    PasswordVerificationComponent,
   ],
   imports: [
     BrowserModule,

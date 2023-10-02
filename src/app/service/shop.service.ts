@@ -14,8 +14,8 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<any> {
-    const body = { email, password }; 
+  login(user_name: string, password: string): Observable<any> {
+    const body = { user_name, password }; 
     return this.http.post<any>(this.url+`login`, body);
   }
 

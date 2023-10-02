@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   title = 'ecommerce-frontend';
-  email:string = "";
+  username:string = "";
   password: string ="";
   hide: boolean = true;
 
@@ -29,7 +29,7 @@ export class HomeComponent {
     private router: Router) {}
 
   signIn(): void{
-    this.service.login(this.email, this.password).subscribe((res) => {
+    this.service.login(this.username, this.password).subscribe((res) => {
      this.signedUser = res.user;
      if(this.signedUser.role === 'Admin') {
       localStorage.setItem('signedUser', JSON.stringify(this.signedUser)); 

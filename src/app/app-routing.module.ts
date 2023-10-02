@@ -4,9 +4,11 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { Product } from './product/product';
+import { PasswordVerificationComponent } from './password-verification/password-verification.component';
 
 const routes: Routes =[
   {path: 'home', component: HomeComponent},
+  {path: 'verify-password', component: PasswordVerificationComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService]},
   {path: 'product', component: Product, canActivate: [AuthGuardService]},
 

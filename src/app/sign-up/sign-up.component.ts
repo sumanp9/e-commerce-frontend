@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ShopService } from '../service/shop.service';
 import { PersonInterface } from '../shop-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,29 +14,31 @@ export class SignUpComponent {
   name: string ="";
   email: string ="";
   password: string ="";
-  phone: string=""
+  phone: string="";
+  address: string ="";
 
   user: PersonInterface = {
     name: '',
+    user_name: '',
+    address: '',
     email: '',
     password: '',
     phone: ''
   }
 
   hide: boolean = true;
+  showUrl: boolean = false;
 
 
   constructor(
     public dialogRef: MatDialogRef<SignUpComponent>,
-    private service: ShopService
+    private service: ShopService,
+    private router: Router
   ) {}
   
 
-  createAccount(): void{
-    this.service.account(this.user).subscribe((response) =>{
-      console.log("Added user", response)
-    });
-    this.dialogRef.close() 
+  next(): void{
+    this.showUrl = true;
   }
 
   togglePasswordVisibility(): void{
@@ -43,10 +46,20 @@ export class SignUpComponent {
   }
 
   disableSave(): boolean {
-    if(this.user.name =='' || this.user.email=='' || this.user.password=='' || this.user.phone =='') {
-      return true;
-    }return false;
+    const { name, email, phone, user_name, address } = this.user;
+    return !name || !email || !phone || !user_name || !address;
+  }
+  
+
+  verify(): void {
+    this.router.navigate(['/verify-password'], {state: {data: this.user}});
+    
+    /*this.service.account(this.user).subscribe((response) =>{
+      console.log("Added user", response)
+    });
+    this.dialogRef.close() 
+    */
+  }
   }
 
   
-}
