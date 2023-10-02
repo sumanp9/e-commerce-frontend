@@ -1,0 +1,12 @@
+.detail-card{
+    width: 400px;
+    height: 600px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+.image{
+    height: 400px;
+}

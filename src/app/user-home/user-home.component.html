@@ -1,10 +1,10 @@
  <mat-toolbar color="primary">
-    <span>Welcome to our Plant Shop {{this.signedUser.name}}</span>
+    <span>Welcome {{this.signedUser.name}}</span>
     <span class="spacer"></span>
     <div>
         <button mat-icon-button  matTooltip="Cart">
-            <mat-icon>
-                shopping_cart
+            <mat-icon matBadge="15" matBadgeColor="warn">
+                shopping_cart_checkout
                 </mat-icon>
         </button>
         <button mat-icon-button  matTooltip="Logout" (click)="this.logOut()">
@@ -21,12 +21,13 @@
                 <mat-card-header>
                   <b>{{product.name}}</b>
                 </mat-card-header>
+                <img mat-card-sm-image src="{{this.product.image}}">
                 <mat-card-content>
                     {{product.description}}
                 </mat-card-content>
                 <mat-card-actions>
                     <span>{{product.price}}</span>
-                    <button mat-icon-button>
+                    <button mat-icon-button (click)="addToCart(product)">
                     <mat-icon>add</mat-icon>    
                     </button>
                   </mat-card-actions>

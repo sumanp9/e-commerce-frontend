@@ -37,5 +37,12 @@ export class ShopService {
     return this.http.post(this.url+`product`, productData);
   }
 
+  productDetails(id: number): Observable<ProductInfo> {
+    const params = new HttpParams().set('id', id.toString())
+
+    console.log
+    return this.http.get<ProductInfo>(this.url+ `product`,{params});
+  }
+
 }
 

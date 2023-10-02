@@ -7,22 +7,24 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent {
 
   productData: ProductInfo = {
     id: -1,
     name: '',
+    image: '',
     description: '',
-    detail:'',
-    price: -1,
-    quantity: -1
+    details:'',
+    price: 0,
+    quantity:0,
   }
+
 
   constructor(
     public dialogRef: MatDialogRef<AddProductComponent>,
-    private service: ShopService
+    private service: ShopService,
   ) {}
 
   onSubmit() {

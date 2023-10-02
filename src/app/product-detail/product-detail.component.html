@@ -1,0 +1,24 @@
+<div class="detail-card">
+    <mat-toolbar color="primary">
+    {{this.product.name}}
+    <span class="spacer"></span>
+    ${{this.product.price}}
+    </mat-toolbar>
+
+
+    <mat-card>
+        <img mat-card-image class="image" src="{{this.product.image}}" alt="Photo of a {{this.product.name}}">
+        <p></p>
+        <mat-card-content>
+            <p>
+             {{this.product.details}}
+            </p>
+          </mat-card-content>
+        <mat-card-actions>
+            <span class="spacer"></span>
+            <button mat-icon-button matTooltip="Add to Cart" (click)="addToCart(this.product)">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

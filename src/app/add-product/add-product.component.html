@@ -23,9 +23,18 @@
             <mat-label>
                 Product Details:
             </mat-label>
-            <input matInput [(ngModel)]="this.productData.detail" name="details">
+            <input matInput [(ngModel)]="this.productData.details" name="details">
         </mat-form-field>
     </p>
+    <p>
+        <mat-form-field>
+            <mat-label>
+                Product Image in url:
+            </mat-label>
+            <input matInput [(ngModel)]="this.productData.image" name="details">
+        </mat-form-field>
+    </p>
+    
     <p>
         <mat-form-field>
             <mat-label>
@@ -40,7 +49,8 @@
                 Product Price: (in dollars)
             </mat-label>
 
-            <input matInput [(ngModel)]="this.productData.price" name="price" type="number">
+            <input matInput [(ngModel)]="productData.price" name="price" type="number">
+            
         </mat-form-field>
     </p>
 

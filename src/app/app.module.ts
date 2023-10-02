@@ -15,6 +15,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';  
 import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatBadgeModule} from '@angular/material/badge'; 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -25,6 +26,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UserHomeComponent } from './user-home/user-home.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 
@@ -36,7 +38,8 @@ import { UserHomeComponent } from './user-home/user-home.component';
     TestComponent,
     HomeComponent,
     AddProductComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
     MatCardModule,
     MatGridListModule,
     MatTooltipModule,
+    MatBadgeModule,
 
     BrowserAnimationsModule,
      AppRoutingModule,

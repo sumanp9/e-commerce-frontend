@@ -3,6 +3,7 @@ import { UserInfo, ProductInfo } from '../shop-interface';
 import { Router } from '@angular/router';
 import { ShopService } from '../service/shop.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 @Component({
   selector: 'app-user-home',
@@ -43,13 +44,14 @@ export class UserHomeComponent {
   getProducts(): void{
     this.service.products().subscribe((result) => {
       this.productList = result;
-
-      console.log(this.productList)
     })
   }
 
-  onCardClick(id: number) {
+  onCardClick(id: number): void {
+    this.dialog.open(ProductDetailComponent, {data: id})
+  }
 
-    alert("id, "+ id)
+  addToCart(product: ProductInfo): void {
+      alert("Added to cart!!!")
   }
 }

@@ -15,8 +15,9 @@ export interface UserInfo{
 export interface ProductInfo{
     id: number,
     name:string, 
+    image: string,
     description:string, 
-    detail:string, 
+    details:string, 
     price: number,
     quantity: number
 }

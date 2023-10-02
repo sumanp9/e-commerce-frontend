@@ -27,16 +27,17 @@
           <mat-card class="product-card">
               <mat-card-header>
                   {{product.name}}
+                  <span class="spacer"></span>
+                  $ {{product.price}}
               </mat-card-header>
+              <img mat-card-md-image src="{{this.product.image}}" alt="Photo of a {{this.product.name}}">
+
               <mat-card-content>
                   {{product.description}}
               </mat-card-content>
-              <mat-card-actions>
-                  <span>{{product.price}}</span>
-                  <button mat-icon-button>
-                  <mat-icon>add</mat-icon>    
-                  </button>
-                </mat-card-actions>
+              <mat-card-footer>
+                  
+                </mat-card-footer>
           </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
