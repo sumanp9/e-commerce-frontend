@@ -21,7 +21,7 @@ export class AuthGuardService {
         return true; // Allow access to the 'admin' route
       }else if(signedUser && signedUser.role === 'User') {
         // Allow access to the user-home route for regular users
-        if (state.url === '/user-home' || '/user-cart') {
+        if (state.url === '/product' || '/user-cart') {
           return true;
         }
       }

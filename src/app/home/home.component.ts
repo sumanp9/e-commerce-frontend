@@ -4,8 +4,6 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
 import { ShopService } from '../service/shop.service';
 import { UserInfo } from '../shop-interface';
 import { Router } from '@angular/router';
-import { AdminComponent } from '../admin/admin.component';
-import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -47,13 +45,13 @@ export class HomeComponent {
   createAccount(): void{
     console.log("Create Account")
     this.dialog.open(SignUpComponent).afterClosed().subscribe((res) => {
-      this.router.navigateByUrl('/user-home');
+      this.router.navigateByUrl('/product');
     });
   }
 
   userPage(user: UserInfo): void {
     localStorage.setItem('signedUser', JSON.stringify(user)); 
-    this.router.navigate(['/user-home'] , {state: {data: user}})
+    this.router.navigate(['/product'] , {state: {data: user}})
   }
 
   togglePasswordVisibility(): void{
@@ -61,7 +59,6 @@ export class HomeComponent {
   }
 
   disabledLogin(email: string, password: string): boolean {
-
     console.log(email, password)
     if(email.length == 0 || password.length==0) return true
     return false;

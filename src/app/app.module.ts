@@ -25,7 +25,7 @@ import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component'; 
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AddProductComponent } from './add-product/add-product.component';
-import { UserHomeComponent } from './user-home/user-home.component';
+import {Product} from './product/product'
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
@@ -38,7 +38,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     TestComponent,
     HomeComponent,
     AddProductComponent,
-    UserHomeComponent,
+    Product,
     ProductDetailComponent,
   ],
   imports: [

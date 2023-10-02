@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './auth/auth-guard.service';
-import { UserHomeComponent } from './user-home/user-home.component';
+import { Product } from './product/product';
 
 const routes: Routes =[
   {path: 'home', component: HomeComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService]},
-  {path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuardService]},
+  {path: 'product', component: Product, canActivate: [AuthGuardService]},
 
 
   { path: '**', redirectTo: 'home' }

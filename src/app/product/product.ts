@@ -6,13 +6,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 @Component({
-  selector: 'app-user-home',
-  templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.css']
+  selector: 'app-product',
+  templateUrl: './product.html',
+  styleUrls: ['./product.css']
 })
 
 
-export class UserHomeComponent {
+export class Product {
 
   signedUser: UserInfo ={
     id: -1,
