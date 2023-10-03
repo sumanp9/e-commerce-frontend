@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { ProductInfo, UserInfo } from '../shop-interface';
+import { Categories, ProductInfo, UserInfo } from '../shop-interface';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ShopService } from '../service/shop.service';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { Product } from '../product/product';
 
 @Component({
   selector: 'app-admin',
@@ -21,6 +22,7 @@ export class AdminComponent {
   }
   userList: UserInfo[] =[];
   productList: ProductInfo[] =[];
+  categories: Categories[] =[];
 
   displayUsers = false;
   displayProducts = false;
@@ -35,6 +37,8 @@ export class AdminComponent {
 
    this.signedUser = history.state.data;
    console.log(this.signedUser)
+   this.getProducts();
+   this.getCategories();
   }
 
   getUsers(): void{
@@ -56,10 +60,40 @@ export class AdminComponent {
     })
   }
 
-  addProduct(): void{
+  getCategories(): void {
+    this.service.categories().subscribe((result) => {
+      this.categories = result;
+    })
+  }
+
+  add(): void{
     const dialogRef = this.dialog.open(AddProductComponent).afterClosed().subscribe((res) => {
       this.getProducts();
     })
+  }
+
+  update(product: ProductInfo): void {
+    const dialogRef = this.dialog.open(AddProductComponent, {data: product}).afterClosed().subscribe((res=> {
+      this.getProducts();
+    }));
+  }
+
+  delete(id: number): void {
+    this.service.deleteProduct(id).subscribe((res) => {
+      console.log(res);
+      this.getProducts();
+    })
+  }
+
+  sortBy(event: any): void {
+    if(event.value === 0) {
+      this.getProducts();
+    } else {
+    const category = event.value.id;
+      this.service.sortBy(category).subscribe((result) => {
+        this.productList = result
+      })
+    }
   }
 
   logOut(): void{

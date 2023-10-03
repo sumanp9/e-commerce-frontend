@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable} from 'rxjs';
-import {PersonInterface, ProductInfo, UserInfo} from '../shop-interface'
+import {Categories, PersonInterface, ProductInfo, UserInfo} from '../shop-interface'
 
 
 @Injectable({
@@ -36,13 +36,29 @@ export class ShopService {
   product(productData: ProductInfo): Observable<any> {
     return this.http.post(this.url+`product`, productData);
   }
+  updateProduct(productData: ProductInfo): Observable<any> {
+    return this.http.put(this.url+`product`, productData);
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.delete(this.url+`product`, {params});
+
+  }
 
   productDetails(id: number): Observable<ProductInfo> {
     const params = new HttpParams().set('id', id.toString())
-
-    console.log
     return this.http.get<ProductInfo>(this.url+ `product`,{params});
   }
 
+  categories(): Observable<Categories[]> {
+    return this.http.get<Categories[]>(this.url+ `categories`);
+  }
+
+  sortBy(category_id: number): Observable<ProductInfo[]> {
+    console.log(category_id)
+    const params = new HttpParams().set('id', category_id.toString())
+    return this.http.get<ProductInfo[]>(this.url+`category`, {params})
+  }
 }
 

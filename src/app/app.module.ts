@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';  
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatBadgeModule} from '@angular/material/badge'; 
+import {MatSelect, MatSelectModule} from '@angular/material/select'; 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -58,6 +59,7 @@ import { PasswordVerificationComponent } from './password-verification/password-
     MatGridListModule,
     MatTooltipModule,
     MatBadgeModule,
+    MatSelectModule,
 
     BrowserAnimationsModule,
      AppRoutingModule,

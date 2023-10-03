@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component} from '@angular/core';
 import { ShopService } from '../service/shop.service';
-import { ProductInfo } from '../shop-interface';
+import { ProductInfo, UserInfo } from '../shop-interface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,6 +10,15 @@ import { ProductInfo } from '../shop-interface';
 })
 
 export class ProductDetailComponent {
+
+  signedUser: UserInfo ={
+    id: -1,
+    name: '',
+    email: '',
+    role: ''
+
+  }
+
   
   product: ProductInfo ={
     id: -1,
@@ -18,24 +27,40 @@ export class ProductDetailComponent {
     description: '',
     details: '',
     price: -1,
-    quantity: -1
+    quantity: -1,
+    category_id: -1
   }
 
   constructor(
-    public dialogRef: MatDialogRef<ProductDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: number,
+    private route: ActivatedRoute,
+    private router: Router,
     private service: ShopService
   ) {}
 
   ngOnInit(): void{
-    this.service.productDetails(this.data).subscribe((result) =>{
-      this.product = result;
-      console.log(this.product)
+    this.signedUser = history.state.data;
+    const id = history.state.id;
+   
+      this.service.productDetails(id).subscribe((result) =>{
+        this.product = result;
+        console.log(this.product)
+      
     });
+    
+   
   }
 
   addToCart(product: ProductInfo) {
     alert("Added to cart!!")
+  }
+
+  return() {
+    this.router.navigate(['/product'] , {state: {data: this.signedUser}});
+  }
+
+
+  logOut() {
+    this.router.navigate(['/home'])
   }
 
 }

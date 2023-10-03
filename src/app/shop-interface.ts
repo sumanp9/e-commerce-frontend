@@ -22,4 +22,10 @@ export interface ProductInfo{
     details:string, 
     price: number,
     quantity: number
+    category_id: number
+}
+
+export interface Categories{
+    id: number, 
+    name: string
 }

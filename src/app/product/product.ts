@@ -48,7 +48,8 @@ export class Product {
   }
 
   onCardClick(id: number): void {
-    this.dialog.open(ProductDetailComponent, {data: id})
+    this.router.navigate(['/productDetail'],  {state:{data: this.signedUser, id: id}})
+    //this.dialog.open(ProductDetailComponent, {data: id})
   }
 
   addToCart(product: ProductInfo): void {

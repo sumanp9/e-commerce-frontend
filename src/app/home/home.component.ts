@@ -28,6 +28,11 @@ export class HomeComponent {
     private service: ShopService,
     private router: Router) {}
 
+  
+  ngOnInit() {
+    localStorage.clear;
+  }
+
   signIn(): void{
     this.service.login(this.username, this.password).subscribe((res) => {
      this.signedUser = res.user;

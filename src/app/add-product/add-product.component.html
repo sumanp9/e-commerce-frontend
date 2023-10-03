@@ -1,4 +1,10 @@
-<h3 mat-dialog-title>Add Product</h3>
+<mat-toolbar color="primary">{{this.data? 'Update Product' : 'Add Product'}}
+    <span class="spacer"></span>
+    <button mat-icon-button color="warn" matDialogClose>
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
 
 <div mat-dialog-content class="example-content">
     <form>
@@ -15,7 +21,7 @@
             <mat-label>
                 Product Description:
             </mat-label>
-            <input matInput [(ngModel)]="this.productData.description" name="description">
+            <textarea matInput [(ngModel)]="this.productData.description" name="description"></textarea>
         </mat-form-field>
     </p>
     <p>
@@ -23,7 +29,7 @@
             <mat-label>
                 Product Details:
             </mat-label>
-            <input matInput [(ngModel)]="this.productData.details" name="details">
+            <textarea matInput [(ngModel)]="this.productData.details" name="details"></textarea>
         </mat-form-field>
     </p>
     <p>
@@ -31,8 +37,18 @@
             <mat-label>
                 Product Image in url:
             </mat-label>
-            <input matInput [(ngModel)]="this.productData.image" name="details">
+            <textarea matInput [(ngModel)]="this.productData.image" name="imageUrl"></textarea>
         </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select (selectionChange)="this.selectedCategory($event)">
+              <mat-option *ngFor="let category of categoryList" [value]="category">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
     </p>
     
     <p>
@@ -55,7 +71,8 @@
     </p>
 
     <p>
-        <button mat-raised-button (click)="this.onSubmit()">Submit</button>
+        <button mat-raised-button (click)="this.onSubmit()" *ngIf="!data">Submit</button>
+        <button mat-raised-button (click)="this.update()" *ngIf="data">Update</button>
     </p>
       
     </form>

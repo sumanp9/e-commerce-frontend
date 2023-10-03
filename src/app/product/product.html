@@ -15,21 +15,19 @@
 
 <p></p>
 <div>
-    <mat-grid-list cols="4" rowHeight="200px" >
+    <mat-grid-list cols="4" rowHeight="200px"  >
         <mat-grid-tile *ngFor="let product of productList">
             <mat-card class="product-card" (click)="onCardClick(product.id)">
                 <mat-card-header>
                   <b>{{product.name}}</b>
                 </mat-card-header>
-                <img mat-card-sm-image src="{{this.product.image}}">
                 <mat-card-content>
+                    <img mat-card-sm-image src="{{this.product.image}}">
+                    <p></p>
                     {{product.description}}
                 </mat-card-content>
                 <mat-card-actions>
-                    <span>{{product.price}}</span>
-                    <button mat-icon-button (click)="addToCart(product)">
-                    <mat-icon>add</mat-icon>    
-                    </button>
+                    $<span>{{product.price}}</span>
                   </mat-card-actions>
             </mat-card>
         </mat-grid-tile>

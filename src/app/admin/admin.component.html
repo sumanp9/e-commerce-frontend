@@ -21,23 +21,38 @@
 </div>
 
 <div *ngIf="this.displayProducts"> 
-<h1>Products <button mat-icon-button (click)="this.addProduct()"> <mat-icon>add</mat-icon></button></h1>
-  <mat-grid-list cols="4" rowHeight="200px" >
+<h1>Products <button mat-icon-button (click)="this.add()"> <mat-icon>add</mat-icon></button>
+  <span class="spacer"></span>
+  <p></p>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="this.sortBy($event)">
+      <mat-option [value]="0">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{category.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</h1>
+  <mat-grid-list cols="4" rowHeight="250px" >
       <mat-grid-tile *ngFor="let product of productList">
           <mat-card class="product-card">
               <mat-card-header>
-                  {{product.name}}
-                  <span class="spacer"></span>
-                  $ {{product.price}}
+                 <b> {{product.name}}</b>
+                  <span class="spacer"></span> Qty: {{product.quantity}}
               </mat-card-header>
-              <img mat-card-md-image src="{{this.product.image}}" alt="Photo of a {{this.product.name}}">
 
               <mat-card-content>
+                <img mat-card-md-image src="{{this.product.image}}" alt="Photo of a {{this.product.name}}">
+                <p></p>
                   {{product.description}}
               </mat-card-content>
-              <mat-card-footer>
-                  
-                </mat-card-footer>
+              <mat-card-actions>
+                ${{product.price}}
+                <span class="spacer"></span>
+                <button mat-icon-button matTooltip="update" (click)="update(this.product)"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button color="accent" (click)="delete(this.product.id)"><mat-icon>delete</mat-icon></button>
+              </mat-card-actions>
           </mat-card>
       </mat-grid-tile>
     </mat-grid-list>

@@ -1,24 +1,40 @@
-<div class="detail-card">
-    <mat-toolbar color="primary">
-    {{this.product.name}}
+<mat-toolbar color="primary">
+    <button mat-icon-button matTooltip="back" (click)="return()">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span>Welcome {{this.signedUser.name}}</span>
     <span class="spacer"></span>
-    ${{this.product.price}}
-    </mat-toolbar>
+    <div>
+        <button mat-icon-button  matTooltip="Cart">
+            <mat-icon matBadge="2" matBadgeColor="warn">
+                shopping_cart_checkout
+                </mat-icon>
+        </button>
+        <button mat-icon-button  matTooltip="Logout" (click)="this.logOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
 
+<div>
+    <mat-grid-list cols="3">
+        <mat-grid-tile 
+        [colspan]="1.5">
+            <mat-card>
+                <img class="product-img" src="{{this.product.image}}">
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=".5">
+        <mat-grid-tile-header>
+            {{this.product.name}}
+        </mat-grid-tile-header>      
+            {{this.product.details}}
+            <mat-grid-tile-footer>
+                ${{this.product.price}}
+                <button mat-icon-button matTooltip="Add to cart"><mat-icon>add</mat-icon></button>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+       
+    </mat-grid-list>
 
-    <mat-card>
-        <img mat-card-image class="image" src="{{this.product.image}}" alt="Photo of a {{this.product.name}}">
-        <p></p>
-        <mat-card-content>
-            <p>
-             {{this.product.details}}
-            </p>
-          </mat-card-content>
-        <mat-card-actions>
-            <span class="spacer"></span>
-            <button mat-icon-button matTooltip="Add to Cart" (click)="addToCart(this.product)">
-                <mat-icon>add_shopping_cart</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
 </div>

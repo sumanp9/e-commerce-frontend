@@ -1,6 +1,6 @@
-.detail-card{
-    width: 400px;
-    height: 600px;
+.product-img {
+    width: 400px; /* Adjust the width as needed */
+    height: 400px; /* Adjust the height as needed */
 }
 
 .spacer {
@@ -8,5 +8,6 @@
   }
   
 .image{
-    height: 400px;
+    max-width: 10%; /* Adjust the maximum width of the image */
+  height: auto; 
 }
