@@ -17,6 +17,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatBadgeModule} from '@angular/material/badge'; 
 import {MatSelect, MatSelectModule} from '@angular/material/select'; 
+import {MatTableModule} from '@angular/material/table'; 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -29,6 +30,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import {Product} from './product/product'
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { PasswordVerificationComponent } from './password-verification/password-verification.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -43,6 +45,7 @@ import { PasswordVerificationComponent } from './password-verification/password-
     Product,
     ProductDetailComponent,
     PasswordVerificationComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { PasswordVerificationComponent } from './password-verification/password-
     MatTooltipModule,
     MatBadgeModule,
     MatSelectModule,
+    MatTableModule,
 
     BrowserAnimationsModule,
      AppRoutingModule,

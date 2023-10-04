@@ -31,7 +31,27 @@
             {{this.product.details}}
             <mat-grid-tile-footer>
                 ${{this.product.price}}
-                <button mat-icon-button matTooltip="Add to cart"><mat-icon>add</mat-icon></button>
+                <span class="spacer"></span>
+
+                <button mat-icon-button class="small-icon" 
+                [disabled]="this.quantityValue<=0" 
+                (click)="this.addQuantity(false)">
+                <mat-icon>remove</mat-icon></button>
+
+                
+                <mat-form-field>
+                    <input matInput [disabled]="true"  [(ngModel)]="this.quantityValue">
+                </mat-form-field>
+
+                <button mat-icon-button class="small-icon"
+                [disabled]="this.quantityValue >= this.product.quantity"  
+                (click)="this.addQuantity(true)" >
+                <mat-icon>add</mat-icon></button>
+
+
+             
+
+                <button mat-raised-button class="small-icon" matTooltip="Add to cart" (click)="this.addToCart(this.product)">Add to Cart</button>
             </mat-grid-tile-footer>
         </mat-grid-tile>
        

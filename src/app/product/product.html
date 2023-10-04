@@ -2,8 +2,8 @@
     <span>Welcome {{this.signedUser.name}}</span>
     <span class="spacer"></span>
     <div>
-        <button mat-icon-button  matTooltip="Cart">
-            <mat-icon matBadge="15" matBadgeColor="warn">
+        <button mat-icon-button  matTooltip="Cart" (click)="this.showCart()">
+            <mat-icon matBadge="{{this.cartQuantity}}" matBadgeColor="warn">
                 shopping_cart_checkout
                 </mat-icon>
         </button>
@@ -14,6 +14,16 @@
 </mat-toolbar>
 
 <p></p>
+<mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="this.sortBy($event)">
+      <mat-option [value]="0">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{category.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p></p>
 <div>
     <mat-grid-list cols="4" rowHeight="200px"  >
         <mat-grid-tile *ngFor="let product of productList">

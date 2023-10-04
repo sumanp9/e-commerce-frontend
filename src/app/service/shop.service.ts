@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable} from 'rxjs';
-import {Categories, PersonInterface, ProductInfo, UserInfo} from '../shop-interface'
+import {Categories, PersonInterface, ProductInfo, TotalQuantity, UserInfo} from '../shop-interface'
+import { CartDetailsResponse } from '../cart-interface';
 
 
 @Injectable({
@@ -59,6 +60,21 @@ export class ShopService {
     console.log(category_id)
     const params = new HttpParams().set('id', category_id.toString())
     return this.http.get<ProductInfo[]>(this.url+`category`, {params})
+  }
+
+  addToCart(product: ProductInfo, user_id: number): Observable<any> {
+    return this.http.post(this.url+ `cart`, {product, user_id});
+  }
+
+  getCartQuantity(user_id: number): Observable<TotalQuantity> {
+    const params = new HttpParams().set('user_id', user_id.toString())
+
+    return this.http.get<TotalQuantity>(this.url+`cartQuantity`, {params});
+  }
+
+  getCartData(user_id: number): Observable<CartDetailsResponse> {
+    const params = new HttpParams().set('user_id', user_id.toString());
+    return this.http.get<CartDetailsResponse>(this.url+'cartDetails', {params});
   }
 }
 

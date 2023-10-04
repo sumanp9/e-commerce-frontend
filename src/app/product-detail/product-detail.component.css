@@ -1,6 +1,6 @@
 .product-img {
-    width: 400px; /* Adjust the width as needed */
-    height: 400px; /* Adjust the height as needed */
+    width: 400px; 
+    height: 400px;
 }
 
 .spacer {
@@ -8,6 +8,10 @@
   }
   
 .image{
-    max-width: 10%; /* Adjust the maximum width of the image */
+    max-width: 10%; 
   height: auto; 
+}
+
+.small-icon {
+  font-size: 16px; 
 }

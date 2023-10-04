@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class ProductDetailComponent {
 
+  quantityValue =0;
+
   signedUser: UserInfo ={
     id: -1,
     name: '',
@@ -50,9 +52,14 @@ export class ProductDetailComponent {
    
   }
 
-  addToCart(product: ProductInfo) {
-    alert("Added to cart!!")
-  }
+  addToCart(product: ProductInfo): void {
+    product.quantity = this.quantityValue;
+    this.service.addToCart(product, this.signedUser.id).subscribe() 
+}
+
+addQuantity(increment: boolean) {
+  this.quantityValue += increment ? 1 : -1;
+}
 
   return() {
     this.router.navigate(['/product'] , {state: {data: this.signedUser}});

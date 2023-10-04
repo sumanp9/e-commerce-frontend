@@ -19,3 +19,11 @@
   .example-full-width {
     width: 100%;
   }
+
+  .centered-text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

@@ -1,0 +1,28 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+.container {
+    display: flex;
+
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+
+.products{
+    flex-grow:2;
+    height: 100%
+}
+
+.space-gap{
+    flex-grow: 1;
+}
+
+.payment{
+    flex-grow: 1;
+}
+
+.image{
+    width: 100px;
+    height: 100px;
+}
