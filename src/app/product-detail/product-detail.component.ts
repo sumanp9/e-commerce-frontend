@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class ProductDetailComponent {
 
+  cartQuantity = 0;
+
   quantityValue =0;
 
   signedUser: UserInfo ={
@@ -45,29 +47,42 @@ export class ProductDetailComponent {
    
       this.service.productDetails(id).subscribe((result) =>{
         this.product = result;
-        console.log(this.product)
+        console.log(this.product.quantity)
       
     });
-    
+
+    this.getCartQuantity();    
    
   }
 
-  addToCart(product: ProductInfo): void {
+addToCart(product: ProductInfo): void {
+  console.log(this.quantityValue);
     product.quantity = this.quantityValue;
-    this.service.addToCart(product, this.signedUser.id).subscribe() 
+    this.service.addToCart(product, this.signedUser.id).subscribe((res) => {
+      this.quantityValue = 0;
+      this.getCartQuantity();
+      alert('Item Added to Cart!')
+    }) 
 }
 
 addQuantity(increment: boolean) {
   this.quantityValue += increment ? 1 : -1;
 }
 
-  return() {
-    this.router.navigate(['/product'] , {state: {data: this.signedUser}});
-  }
+getCartQuantity(): void {
+  this.service.getCartQuantity(this.signedUser.id).subscribe((res) => {
+    this.cartQuantity = res.totalQuantity;
+  })
+}
 
+showCart(): void{
+  this.router.navigate(['/cart'],  {state:{data: this.signedUser}})
+}
 
+return() {
+  this.router.navigate(['/product'] , {state: {data: this.signedUser}});
+}
   logOut() {
     this.router.navigate(['/home'])
   }
-
 }

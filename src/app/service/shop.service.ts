@@ -76,5 +76,15 @@ export class ShopService {
     const params = new HttpParams().set('user_id', user_id.toString());
     return this.http.get<CartDetailsResponse>(this.url+'cartDetails', {params});
   }
+
+  increaseQty(id: number, product_id: number, increment: boolean):  Observable<any> {
+    return this.http.put<any>(this.url+`increaseCartQty`,  {id, product_id, increment})
+  }
+
+  deleteCartItem(id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.delete<any>(this.url+`cartItem` , {params});
+  }
+
 }
 

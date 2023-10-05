@@ -84,8 +84,6 @@ export class Product {
 
 
   showCart(): void{
-    //this.router.navigate(['/cart', this.signedUser.id], { relativeTo: this.route }, );
-   this.router.navigate(['/cart'],  {state:{data: this.signedUser}})
-
+    this.router.navigate(['/cart'],  {state:{data: this.signedUser}})
   }
 }

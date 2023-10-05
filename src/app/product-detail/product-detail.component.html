@@ -5,8 +5,8 @@
     <span>Welcome {{this.signedUser.name}}</span>
     <span class="spacer"></span>
     <div>
-        <button mat-icon-button  matTooltip="Cart">
-            <mat-icon matBadge="2" matBadgeColor="warn">
+        <button mat-icon-button  matTooltip="Cart" (click)="showCart()">
+            <mat-icon matBadge="{{this.cartQuantity}}" matBadgeColor="warn">
                 shopping_cart_checkout
                 </mat-icon>
         </button>
@@ -50,8 +50,14 @@
 
 
              
+                <mat-error *ngIf="this.product.quantity == 0">
+                    Item out of stock
+                </mat-error>
 
-                <button mat-raised-button class="small-icon" matTooltip="Add to cart" (click)="this.addToCart(this.product)">Add to Cart</button>
+
+                <button mat-raised-button class="small-icon" matTooltip="Add to cart" 
+                *ngIf="this.product.quantity>0" (click)="addToCart(this.product)">
+                Add to Cart</button>
             </mat-grid-tile-footer>
         </mat-grid-tile>
        

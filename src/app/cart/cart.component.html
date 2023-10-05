@@ -37,7 +37,20 @@
           </ng-container>
           <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef> Quantity </th>
-            <td mat-cell *matCellDef="let cart"> {{cart.quantity}} </td>
+            <td mat-cell *matCellDef="let cart">
+              <button mat-icon-button (click)="incrementQuantity(cart.id, cart.product.id, false, cart.quantity) " [disabled]="this.cart.quantity == 0">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <mat-form-field class="quantityInput">
+               <input matInput  [(ngModel)] ="cart.quantity" [disabled]="true">
+              </mat-form-field>
+               <button mat-icon-button (click)="incrementQuantity(cart.id, cart.product.id, true, cart.quantity)">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteItem(cart.id)" color="red">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </ng-container>
           <ng-container matColumnDef="total">
             <th mat-header-cell *matHeaderCellDef> Total </th>

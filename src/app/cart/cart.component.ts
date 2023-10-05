@@ -44,6 +44,38 @@ export class CartComponent {
       console.log(this.cartDetails.data.length)
     })
   }
+  
+
+
+  incrementQuantity(id: number,product_id: number, increment: boolean, qty: number) {
+    console.log(qty, increment)    
+    if(qty >= 1 && increment) {
+      console.log('Increment operation completed:');
+
+      this.service.increaseQty(id, product_id, increment).subscribe((result)=>{
+        this.getCartData(this.signedUser.id);
+      });
+    } else if(qty > 1 && !increment) {
+      console.log('Decerement operation completed:');
+
+      this.service.increaseQty(id, product_id, increment).subscribe((result)=>{
+        this.getCartData(this.signedUser.id);
+      });
+    }
+    
+      else if(qty === 1 && !increment){
+
+        this.deleteItem(id)
+      }
+       //not calling 
+  }
+
+  deleteItem(id: number) {
+
+    this.service.deleteCartItem(id).subscribe((res)=> {
+      this.getCartData(this.signedUser.id);
+    })
+  }
 
   return() {
     this.router.navigate(['/product'] , {state: {data: this.signedUser}});

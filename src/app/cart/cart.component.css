@@ -26,3 +26,10 @@
     width: 100px;
     height: 100px;
 }
+
+.quantityInput{
+  font-size: 15 px; 
+  padding: 5px 10px; 
+  height: 70px;
+  width: 50px;
+}
