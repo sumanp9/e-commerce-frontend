@@ -3,6 +3,7 @@ import { UserInfo } from '../shop-interface';
 import { ShopService } from '../service/shop.service';
 import { CartDetailsResponse } from '../cart-interface';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -28,7 +29,8 @@ export class CartComponent {
 
   constructor(
     private service: ShopService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ){ }
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class CartComponent {
 
       this.service.increaseQty(id, product_id, increment).subscribe((result)=>{
         this.getCartData(this.signedUser.id);
+        this._snackBar.open(result,'Added item')
       });
     } else if(qty > 1 && !increment) {
       console.log('Decerement operation completed:');
@@ -67,7 +70,6 @@ export class CartComponent {
 
         this.deleteItem(id)
       }
-       //not calling 
   }
 
   deleteItem(id: number) {
@@ -75,6 +77,10 @@ export class CartComponent {
     this.service.deleteCartItem(id).subscribe((res)=> {
       this.getCartData(this.signedUser.id);
     })
+  }
+
+  onCheckOut(): void{
+    this.service.checkout(this.cartDetails);
   }
 
   return() {
@@ -86,5 +92,8 @@ export class CartComponent {
     localStorage.clear;
     this.router.navigate(['/home'])
   }
+
+
+  
 
 }

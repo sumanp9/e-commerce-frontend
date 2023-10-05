@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Categories, ProductInfo, UserInfo } from '../shop-interface';
 import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ShopService } from '../service/shop.service';
 import { AddProductComponent } from '../add-product/add-product.component';
-import { Product } from '../product/product';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-admin',
@@ -27,10 +28,13 @@ export class AdminComponent {
   displayUsers = false;
   displayProducts = false;
 
+  private durationInSeconds: number =3000;
+
   constructor(
     private router: Router,
     public service: ShopService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _snackbar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -69,19 +73,30 @@ export class AdminComponent {
   add(): void{
     const dialogRef = this.dialog.open(AddProductComponent).afterClosed().subscribe((res) => {
       this.getProducts();
+      this._snackbar.open("Product Added successfully", 'Close',{
+        duration: this.durationInSeconds,
+      });
+
     })
   }
 
   update(product: ProductInfo): void {
     const dialogRef = this.dialog.open(AddProductComponent, {data: product}).afterClosed().subscribe((res=> {
-      this.getProducts();
+        this.getProducts();
+       this._snackbar.open("Product Updated successfully", 'Close',{
+        duration: this.durationInSeconds
+      });
+   
     }));
   }
 
   delete(id: number): void {
     this.service.deleteProduct(id).subscribe((res) => {
-      console.log(res);
       this.getProducts();
+      this._snackbar.open("Product Deleted successfully", 'Close',{
+        duration: this.durationInSeconds
+      });
+
     })
   }
 

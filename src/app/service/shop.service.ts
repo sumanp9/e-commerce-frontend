@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable} from 'rxjs';
 import {Categories, PersonInterface, ProductInfo, TotalQuantity, UserInfo} from '../shop-interface'
 import { CartDetailsResponse } from '../cart-interface';
+import { loadStripe } from '@stripe/stripe-js';
 
 
 @Injectable({
@@ -84,6 +85,17 @@ export class ShopService {
   deleteCartItem(id: number): Observable<any> {
     const params = new HttpParams().set('id', id.toString())
     return this.http.delete<any>(this.url+`cartItem` , {params});
+  }
+
+  checkout(cartDetails: CartDetailsResponse ) {
+    this.http.post('http://localhost:8080/checkout', {
+      cart: cartDetails
+    }).subscribe(async (res:any) => {
+        let stripe = await loadStripe('pk_test_51NvpBYI46CkulZFbTrUQP79ByenmF7iOvnWhZuSI4VQsIfg5tELYi58hjg0SM6HWo3uSjGcTuzZDuuKC6UzegYhe00IFQhCABg');
+        stripe?.redirectToCheckout({
+          sessionId: res.id
+        })
+    });
   }
 
 }

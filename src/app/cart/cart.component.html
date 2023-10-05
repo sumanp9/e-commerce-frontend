@@ -68,9 +68,9 @@
 
 </div>
     <div class="pay">
-      payment:
-
-      Total cost: {{this.cartDetails.grandTotal}}
+      <strong>Total cost: </strong>{{this.cartDetails.grandTotal | currency: 'USD'}}
+      <p></p>
+      <button mat-raised-button (click)="onCheckOut()" color="accent" matTooltip="checkout">Procced to Checkout</button>
     </div>
       
 </div>

@@ -18,6 +18,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatBadgeModule} from '@angular/material/badge'; 
 import {MatSelect, MatSelectModule} from '@angular/material/select'; 
 import {MatTableModule} from '@angular/material/table'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -64,6 +65,7 @@ import { CartComponent } from './cart/cart.component';
     MatBadgeModule,
     MatSelectModule,
     MatTableModule,
+    MatSnackBarModule,
 
     BrowserAnimationsModule,
      AppRoutingModule,
