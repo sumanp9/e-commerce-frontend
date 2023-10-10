@@ -12,3 +12,11 @@
 .product-card:hover{
   cursor: pointer;
 }
+
+
+.centered-text {
+  flex: 27;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

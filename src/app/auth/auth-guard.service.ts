@@ -14,8 +14,11 @@ export class AuthGuardService {
 
 
     const signedUserString = localStorage.getItem('signedUser');
+
+   
     if (signedUserString) {
       const signedUser = JSON.parse(signedUserString);
+      console.log("Uer trying to sign in" + signedUser.role);
 
       if (signedUser && signedUser.role === 'Admin') {
         return true; // Allow access to the 'admin' route
@@ -24,8 +27,12 @@ export class AuthGuardService {
         if (state.url.includes('/product') || state.url.includes('/productDetail')|| state.url.includes('/cart')){
           return true;
         }
+      } else if(signedUser && !signedUser.role ) {
+        console.log("new user"+ signedUser.name)
+          if(state.url.includes('/verify-password')) {
+            return true;
+          }
       }
-
     }
       this.router.navigate(['/home']);
       return false; 

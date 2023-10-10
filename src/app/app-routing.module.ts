@@ -7,14 +7,16 @@ import { Product } from './product/product';
 import { PasswordVerificationComponent } from './password-verification/password-verification.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartComponent } from './cart/cart.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes =[
   {path: 'home', component: HomeComponent},
-  {path: 'verify-password', component: PasswordVerificationComponent},
+  {path: 'verify-password', component: PasswordVerificationComponent, canActivate: [AuthGuardService]},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService]},
   {path: 'product', component: Product, canActivate: [AuthGuardService]},
   {path: 'productDetail', component: ProductDetailComponent, canActivate: [AuthGuardService]},
   {path: 'cart', component: CartComponent, canActivate: [AuthGuardService]},
+  {path:'test', component: TestComponent},
 
 
 

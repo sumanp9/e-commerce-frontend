@@ -3,6 +3,8 @@
         <mat-icon>arrow_back_ios</mat-icon>
     </button>
     <span>Welcome {{this.signedUser.name}}</span>
+    <span class="centered-text">
+        <mat-icon>local_mall</mat-icon>Shoparoo</span>
     <span class="spacer"></span>
     <div>
         <button mat-icon-button  matTooltip="Cart" (click)="showCart()">
@@ -30,7 +32,7 @@
         </mat-grid-tile-header>      
             {{this.product.details}}
             <mat-grid-tile-footer>
-                ${{this.product.price}}
+                {{this.product.price | currency:"USD" }}
                 <span class="spacer"></span>
 
                 <button mat-icon-button class="small-icon" 

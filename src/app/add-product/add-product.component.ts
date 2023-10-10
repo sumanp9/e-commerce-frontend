@@ -28,7 +28,10 @@ export class AddProductComponent {
 
   categoryList: Categories[] = [];
 
+  duplicate_error= '';
 
+  newCategory = '';
+  addCategory = false;
   constructor(
     public dialogRef: MatDialogRef<AddProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductInfo,
@@ -40,9 +43,7 @@ export class AddProductComponent {
   }
 
   ngOnInit() {
-    this.service.categories().subscribe((result) => {
-      this.categoryList = result;
-    })
+    this.getCategories();
 }
 
   onSubmit() {
@@ -56,8 +57,6 @@ export class AddProductComponent {
   }
 
   selectedCategory(event: any) {
-
-
     console.log(event.value.id)
     this.selectedCategoryId = event.value.id;
   }
@@ -67,4 +66,19 @@ export class AddProductComponent {
     this.dialogRef.close();
   }
 
+  getCategories() {
+    this.service.categories().subscribe((result) => {
+      this.categoryList = result;
+    })
+  }
+
+
+  saveCategory() {
+    this.addCategory = false;
+    this.service.addCategory(this.newCategory).subscribe((res) => {
+      if(res)  {
+        this.getCategories();
+      }
+  })
+  }
 }

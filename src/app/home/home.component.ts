@@ -30,7 +30,7 @@ export class HomeComponent {
 
   
   ngOnInit() {
-    localStorage.clear;
+   localStorage.clear();
   }
 
   signIn(): void{
@@ -49,8 +49,8 @@ export class HomeComponent {
 
   createAccount(): void{
     console.log("Create Account")
-    this.dialog.open(SignUpComponent).afterClosed().subscribe((res) => {
-      this.router.navigateByUrl('/product');
+    this.dialog.open(SignUpComponent, {disableClose: true,}).afterClosed().subscribe((result) => {
+      console.log("result it: "+  result)
     });
   }
 
@@ -64,7 +64,6 @@ export class HomeComponent {
   }
 
   disabledLogin(email: string, password: string): boolean {
-    console.log(email, password)
     if(email.length == 0 || password.length==0) return true
     return false;
   }

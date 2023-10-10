@@ -5,7 +5,6 @@
     </button>
 </mat-toolbar>
 
-
 <div mat-dialog-content class="example-content">
     <form>
         <p>
@@ -40,7 +39,7 @@
             <textarea matInput [(ngModel)]="this.productData.image" name="imageUrl"></textarea>
         </mat-form-field>
     </p>
-    <p>
+    <p *ngIf="!addCategory" >
         <mat-form-field>
             <mat-label>Category</mat-label>
             <mat-select (selectionChange)="this.selectedCategory($event)">
@@ -49,6 +48,22 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <button matTooltip="add more category" mat-icon-button (click)="addCategory = true">
+            <mat-icon>add</mat-icon>
+          </button>
+    </p>
+
+
+    <p *ngIf="addCategory">
+
+        <mat-form-field>
+            <mat-label>Add new Category</mat-label>
+        <input matInput [(ngModel)] = "this.newCategory" name="category"> 
+        
+        </mat-form-field>
+        <button mat-icon-button (click)="this.saveCategory()" [disabled]="this.newCategory.length<1">
+            <mat-icon>save</mat-icon>
+        </button>
     </p>
     
     <p>

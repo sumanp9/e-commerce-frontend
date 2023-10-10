@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { ShopService } from '../service/shop.service';
 import { ProductInfo, UserInfo } from '../shop-interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
@@ -38,7 +39,8 @@ export class ProductDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: ShopService
+    private service: ShopService,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void{
@@ -61,7 +63,7 @@ addToCart(product: ProductInfo): void {
     this.service.addToCart(product, this.signedUser.id).subscribe((res) => {
       this.quantityValue = 0;
       this.getCartQuantity();
-      alert('Item Added to Cart!')
+      this.snackbar.open("Added item/s to cart", "close", {duration: 3000})
     }) 
 }
 

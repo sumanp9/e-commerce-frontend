@@ -5,12 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShopService } from '../service/shop.service';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent {
 
@@ -27,6 +27,7 @@ export class AdminComponent {
 
   displayUsers = false;
   displayProducts = false;
+  errorMessage: any;
 
   private durationInSeconds: number =3000;
 
@@ -71,23 +72,40 @@ export class AdminComponent {
   }
 
   add(): void{
-    const dialogRef = this.dialog.open(AddProductComponent).afterClosed().subscribe((res) => {
+    const dialogRef = this.dialog.open(AddProductComponent, {disableClose: true}).afterClosed().subscribe((result) => {
       this.getProducts();
-      this._snackbar.open("Product Added successfully", 'Close',{
-        duration: this.durationInSeconds,
+            this._snackbar.open('Product Added successfully', 'Close', {
+              duration: 3000, 
+            });
+        
+      }, (error) => {
+        this.errorMessage = error;
       });
-
-    })
   }
 
+
+
+
   update(product: ProductInfo): void {
-    const dialogRef = this.dialog.open(AddProductComponent, {data: product}).afterClosed().subscribe((res=> {
-        this.getProducts();
-       this._snackbar.open("Product Updated successfully", 'Close',{
-        duration: this.durationInSeconds
-      });
+    this.dialog.open(AddProductComponent, {disableClose: true,   data: product}).afterClosed().subscribe(
+      {
+        next: (result) => {
+          if(!result) {
+            console.log("updating result")
+            this.getProducts();
+            this._snackbar.open("Product Updated successfully", 'Close',{
+            duration: this.durationInSeconds
+          });
+        } else {
+          console.log("hello")
+        }
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      } 
    
-    }));
+    );
   }
 
   delete(id: number): void {

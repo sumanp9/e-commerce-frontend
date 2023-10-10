@@ -32,7 +32,6 @@ export class SignUpComponent {
 
   constructor(
     public dialogRef: MatDialogRef<SignUpComponent>,
-    private service: ShopService,
     private router: Router
   ) {}
   
@@ -52,13 +51,10 @@ export class SignUpComponent {
   
 
   verify(): void {
+    this.dialogRef.close();
+    localStorage.setItem('signedUser', JSON.stringify(this.user)); 
     this.router.navigate(['/verify-password'], {state: {data: this.user}});
-    
-    /*this.service.account(this.user).subscribe((response) =>{
-      console.log("Added user", response)
-    });
-    this.dialogRef.close() 
-    */
+
   }
   }
 

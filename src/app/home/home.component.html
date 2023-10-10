@@ -3,7 +3,14 @@
     <p>
       <mat-toolbar color="primary">
         <span class="centered-text">
-          <mat-icon>local_mall</mat-icon>Shoparoo</span>
+          <mat-icon color="yellow">local_mall</mat-icon>Shoparoo</span>
+          <span class="spacer">            
+            <button mat-icon-button class="button" 
+            matTooltip="Create New Account"
+            (click)="this.createAccount()">
+              <mat-icon color="green">person_add</mat-icon>
+            </button>
+          </span>
       </mat-toolbar>
     </p>
       <div class="example-container">
@@ -25,7 +32,6 @@
           
           <button mat-raised-button class="button" [disabled]="this.disabledLogin(this.username, this.password)" 
           (click)="this.signIn()">Continue</button>
-            <button mat-raised-button class="button" (click)="this.createAccount()">Create Account</button>
         </form>
   
       </div>

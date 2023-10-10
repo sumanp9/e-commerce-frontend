@@ -50,26 +50,30 @@ export class CartComponent {
 
 
   incrementQuantity(id: number,product_id: number, increment: boolean, qty: number) {
-    console.log(qty, increment)    
-    if(qty >= 1 && increment) {
-      console.log('Increment operation completed:');
 
-      this.service.increaseQty(id, product_id, increment).subscribe((result)=>{
-        this.getCartData(this.signedUser.id);
-        this._snackBar.open(result,'Added item')
-      });
-    } else if(qty > 1 && !increment) {
-      console.log('Decerement operation completed:');
-
-      this.service.increaseQty(id, product_id, increment).subscribe((result)=>{
-        this.getCartData(this.signedUser.id);
-      });
-    }
-    
+    try {
+      if(qty >= 1 && increment) {
+        console.log('Increment operation completed:');
+        this.service.increaseQty(id, product_id, increment).subscribe((result)=>{
+          this._snackBar.open(result,'Added item')
+        });
+      } else if(qty > 1 && !increment) {
+        console.log('Decerement operation completed:');
+        this.service.increaseQty(id, product_id, increment).subscribe((result)=>{
+          if(!result) {
+            this._snackBar.open(result,'Decresed item')
+          }
+        });
+      }
       else if(qty === 1 && !increment){
-
         this.deleteItem(id)
       }
+    } catch(err) {
+
+    }finally{
+      console.log("refreshing")
+      this.getCartData(this.signedUser.id);
+    }
   }
 
   deleteItem(id: number) {
