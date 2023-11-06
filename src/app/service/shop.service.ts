@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import { Observable, catchError, throwError} from 'rxjs';
-import {Categories, PersonInterface, ProductInfo, TotalQuantity, UserInfo} from '../shop-interface'
+import {Categories, PersonInterface, ProductInfo, TotalQuantity, Transaction, UserInfo} from '../shop-interface'
 import { CartDetailsResponse } from '../cart-interface';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -91,15 +91,16 @@ export class ShopService {
     return this.http.post<any>(this.url+ `category`, {name: category});
   }
 
-  checkout(cartDetails: CartDetailsResponse ) {
-    this.http.post('http://localhost:8080/checkout', {
-      cart: cartDetails
-    }).subscribe(async (res:any) => {
-        let stripe = await loadStripe('pk_test_51NvpBYI46CkulZFbTrUQP79ByenmF7iOvnWhZuSI4VQsIfg5tELYi58hjg0SM6HWo3uSjGcTuzZDuuKC6UzegYhe00IFQhCABg');        
-        stripe?.redirectToCheckout({
-          sessionId: res
-        })
-    });
+  checkout(stripeToken: any, amount: number): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/checkout', {token: stripeToken, amount: amount});
+  }
+
+  createTransaction(cartData: CartDetailsResponse, id: number): Observable<any>{
+    return this.http.put<any>(this.url+ `transaction`, {cartData, id});
+  }
+
+  transactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url+ `transactions`);
   }
 
 }

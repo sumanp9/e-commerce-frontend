@@ -33,3 +33,11 @@ export interface Categories{
 export interface TotalQuantity{
     totalQuantity: number
 }
+
+export interface Transaction{
+    id: number, 
+    product_name: string,
+    quantity: string,
+    price: string, 
+    user_id: number
+}

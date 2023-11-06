@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Categories, ProductInfo, UserInfo } from '../shop-interface';
+import { Categories, ProductInfo, UserInfo, Transaction } from '../shop-interface';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ShopService } from '../service/shop.service';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-admin',
@@ -24,9 +23,13 @@ export class AdminComponent {
   userList: UserInfo[] =[];
   productList: ProductInfo[] =[];
   categories: Categories[] =[];
+  transactionList: Transaction[] = [];
+
+  displayedColumns: string[] = ['Name', 'Price', 'Quantity', 'Total', 'User']
 
   displayUsers = false;
   displayProducts = false;
+  showTransactions = false;
   errorMessage: any;
 
   private durationInSeconds: number =3000;
@@ -49,6 +52,7 @@ export class AdminComponent {
   getUsers(): void{
     this.displayUsers = true;
     this.displayProducts = false;
+    this.showTransactions = false;
     this.service.users().subscribe((result) => {
       this.userList = result;
       console.log(this.userList)
@@ -58,10 +62,26 @@ export class AdminComponent {
   getProducts(): void{
     this.displayProducts = true;
     this.displayUsers = false;
+    this.showTransactions = false;
     this.service.products().subscribe((result) => {
       this.productList = result;
 
       console.log(this.productList)
+    })
+  }
+
+  getTransactions(): void{
+    this.showTransactions = true;
+    this.displayProducts = false;
+    this.displayUsers = false;
+
+    this.service.transactions().subscribe((result: Transaction[]) => {
+      if(result) {
+        this.transactionList = result;
+        console.log(this.transactionList)
+      } else {
+        console.log("No transactions found!!")
+      }
     })
   }
 
