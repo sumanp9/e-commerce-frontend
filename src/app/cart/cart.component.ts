@@ -119,11 +119,10 @@ export class CartComponent {
 
     const paymentStripe = (stripeToken: any) => {
       this.service.checkout(stripeToken, this.cartDetails.grandTotal).subscribe((data) => {
-        console.log(data)
 
         if(data.data === "Success") {
           console.log("Success Transaction");
-          this.createTransaction();
+          this.createTransaction(data.charge_id);
 
         } else {
           console.log("Failure Transaction")
@@ -158,9 +157,9 @@ export class CartComponent {
     }
   }
 
-  createTransaction(): void {
-    console.log(this.cartDetails);
-    this.service.createTransaction(this.cartDetails, this.signedUser.id).subscribe((result) => {
+  createTransaction(charge_id: string): void {
+    console.log(this.cartDetails+" " +charge_id);
+    this.service.createTransaction(this.cartDetails, this.signedUser.id, this.signedUser.name, charge_id ).subscribe((result) => {
       this.getCartData(this.signedUser.id);
     });
   }

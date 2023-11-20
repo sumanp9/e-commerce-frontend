@@ -5,6 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShopService } from '../service/shop.service';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { WebSocketService } from '../service/websocket.service';
+import { ChangeDetectorRef } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-admin',
@@ -24,13 +27,17 @@ export class AdminComponent {
   productList: ProductInfo[] =[];
   categories: Categories[] =[];
   transactionList: Transaction[] = [];
+  dataSource: any;
 
-  displayedColumns: string[] = ['Name', 'Price', 'Quantity', 'Total', 'User']
+
+
+  displayedColumns: string[] = ['Charge Id', 'User', 'Total']
 
   displayUsers = false;
   displayProducts = false;
   showTransactions = false;
   errorMessage: any;
+  transaction: any;
 
   private durationInSeconds: number =3000;
 
@@ -39,7 +46,12 @@ export class AdminComponent {
     public service: ShopService,
     private dialog: MatDialog,
     private _snackbar: MatSnackBar,
-  ) {}
+    private webSocketService: WebSocketService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+
+    this.dataSource = new MatTableDataSource<Transaction>(this.transactionList);
+  }
 
   ngOnInit(): void {
 
@@ -47,6 +59,23 @@ export class AdminComponent {
    console.log(this.signedUser)
    this.getProducts();
    this.getCategories();
+   this.getTransactions();
+
+  this.webSocketService.listen('test event').subscribe((newTransaction: Transaction) => {
+    const transaction: Transaction = {
+      id: newTransaction.id,
+      charge_id: newTransaction.charge_id,
+      total: newTransaction.total,
+      user: newTransaction.user
+    }
+    console.log("socket news: " + transaction.charge_id + transaction.total + transaction.user)
+    this.transactionList.unshift(transaction);
+
+    this.dataSource.data = this.transactionList;
+    this.changeDetectorRef.detectChanges();
+  
+  })
+
   }
 
   getUsers(): void{
@@ -78,6 +107,7 @@ export class AdminComponent {
     this.service.transactions().subscribe((result: Transaction[]) => {
       if(result) {
         this.transactionList = result;
+        this.dataSource.data = this.transactionList;
         console.log(this.transactionList)
       } else {
         console.log("No transactions found!!")

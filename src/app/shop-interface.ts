@@ -35,6 +35,14 @@ export interface TotalQuantity{
 }
 
 export interface Transaction{
+    id: number,
+    charge_id: string, 
+    user: string,
+    total: number, 
+
+}
+
+export interface TransactionDetails{
     id: number, 
     product_name: string,
     quantity: string,
