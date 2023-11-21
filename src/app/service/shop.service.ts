@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import { Observable, catchError, throwError} from 'rxjs';
-import {Categories, PersonInterface, ProductInfo, TotalQuantity, Transaction, UserInfo} from '../shop-interface'
+import {HttpClient, HttpParams} from '@angular/common/http';
+import { Observable} from 'rxjs';
+import {Categories, PersonInterface, ProductInfo, TotalQuantity, Transaction, TransactionDetails, UserInfo} from '../shop-interface'
 import { CartDetailsResponse } from '../cart-interface';
-import { loadStripe } from '@stripe/stripe-js';
 
 
 @Injectable({
@@ -95,12 +94,16 @@ export class ShopService {
     return this.http.post<any>('http://localhost:8080/checkout', {token: stripeToken, amount: amount});
   }
 
-  createTransaction(cartData: CartDetailsResponse, id: number): Observable<any>{
-    return this.http.put<any>(this.url+ `transaction`, {cartData, id});
+  createTransaction(cartData: CartDetailsResponse, id: number, name: string, charge_id: string): Observable<any>{
+    return this.http.put<any>(this.url+ `transaction`, {cartData, id, name, charge_id});
   }
 
   transactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.url+ `transactions`);
+  }
+  transactionDetails(id: string): Observable<TransactionDetails[]> {
+    const params = new HttpParams().set('transaction_id', id.toString())
+    return this.http.get<TransactionDetails[]>(this.url+ 'transactionsDetails', {params})
   }
 
 }

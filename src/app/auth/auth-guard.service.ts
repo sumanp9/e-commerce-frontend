@@ -21,7 +21,11 @@ export class AuthGuardService {
       console.log("Uer trying to sign in" + signedUser.role);
 
       if (signedUser && signedUser.role === 'Admin') {
-        return true; // Allow access to the 'admin' route
+        return true;
+       /* if(state.url.includes('/admin') || state.url.includes('/details')) {
+          return true; 
+          //need to add jwt token
+        }*/
       }else if(signedUser && signedUser.role === 'User') {
         // Allow access to the user-home route for regular users
         if (state.url.includes('/product') || state.url.includes('/productDetail')|| state.url.includes('/cart')){

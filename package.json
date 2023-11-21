@@ -21,7 +21,10 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@stripe/stripe-js": "^1.54.2",
+    "@types/socket.io-client": "^3.0.0",
+    "ngx-socket-io": "^4.6.1",
     "rxjs": "~7.8.0",
+    "socket.io-client": "^4.7.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
