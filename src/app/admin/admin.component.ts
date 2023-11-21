@@ -184,5 +184,16 @@ export class AdminComponent {
     this.router.navigate(['/home']);
   }
 
+  details(id: string): void{
+    //update pointer
+    //call service 
+   // this.service.getTransactionDetails(chargeId)
+    //direct to another page or dropdown from the column
+
+    console.log(this.signedUser);
+
+    this.router.navigate(['/details'],  {state:{data: id}});
+  }
+
   
 }

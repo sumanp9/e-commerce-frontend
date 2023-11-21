@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable} from 'rxjs';
-import {Categories, PersonInterface, ProductInfo, TotalQuantity, Transaction, UserInfo} from '../shop-interface'
+import {Categories, PersonInterface, ProductInfo, TotalQuantity, Transaction, TransactionDetails, UserInfo} from '../shop-interface'
 import { CartDetailsResponse } from '../cart-interface';
 
 
@@ -100,6 +100,10 @@ export class ShopService {
 
   transactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.url+ `transactions`);
+  }
+  transactionDetails(id: string): Observable<TransactionDetails[]> {
+    const params = new HttpParams().set('transaction_id', id.toString())
+    return this.http.get<TransactionDetails[]>(this.url+ 'transactionsDetails', {params})
   }
 
 }

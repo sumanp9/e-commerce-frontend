@@ -78,13 +78,16 @@
         </ng-container>
       
         <ng-container matColumnDef="Total">
-          <th mat-header-cell *matHeaderCellDef> Grand Total </th>
+          <th mat-header-cell *matHeaderCellDef> Total </th>
           <td mat-cell *matCellDef="let transaction"> {{transaction.total| currency: 'USD'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Charge Id">
-          <th mat-header-cell *matHeaderCellDef> Charge Id </th>
-          <td mat-cell *matCellDef="let transaction"> {{transaction.charge_id}} </td>
+          <th mat-header-cell *matHeaderCellDef> Transaction Id </th>
+          <td mat-cell *matCellDef="let transaction"> 
+            <a (click)="details(transaction.id)">{{transaction.charge_id}} 
+            </a>
+          </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -57,34 +57,36 @@ export class ProductDetailComponent {
    
   }
 
-addToCart(product: ProductInfo): void {
-  console.log(this.quantityValue);
-    product.quantity = this.quantityValue;
-    this.service.addToCart(product, this.signedUser.id).subscribe((res) => {
-      this.quantityValue = 0;
-      this.getCartQuantity();
-      this.snackbar.open("Added item/s to cart", "close", {duration: 3000})
-    }) 
-}
+  addToCart(product: ProductInfo): void {
+    console.log(this.quantityValue);
+      product.quantity = this.quantityValue;
+      this.service.addToCart(product, this.signedUser.id).subscribe((res) => {
+        this.quantityValue = 0;
+        this.getCartQuantity();
+        this.snackbar.open("Added item/s to cart", "close", {duration: 3000})
+      }) 
+  }
 
-addQuantity(increment: boolean) {
-  this.quantityValue += increment ? 1 : -1;
-}
+  addQuantity(increment: boolean) {
+    this.quantityValue += increment ? 1 : -1;
+  }
 
-getCartQuantity(): void {
-  this.service.getCartQuantity(this.signedUser.id).subscribe((res) => {
-    this.cartQuantity = res.totalQuantity;
-  })
-}
+  getCartQuantity(): void {
+    this.service.getCartQuantity(this.signedUser.id).subscribe((res) => {
+      this.cartQuantity = res.totalQuantity;
+    })
+  }
 
-showCart(): void{
-  this.router.navigate(['/cart'],  {state:{data: this.signedUser}})
-}
+  showCart(): void{
+    this.router.navigate(['/cart'],  {state:{data: this.signedUser}})
+  }
 
-return() {
-  this.router.navigate(['/product'] , {state: {data: this.signedUser}});
-}
+  return() {
+    this.router.navigate(['/product'] , {state: {data: this.signedUser}});
+  }
+
   logOut() {
     this.router.navigate(['/home'])
   }
+
 }

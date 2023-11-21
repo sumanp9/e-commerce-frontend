@@ -45,7 +45,7 @@ export interface Transaction{
 export interface TransactionDetails{
     id: number, 
     product_name: string,
-    quantity: string,
-    price: string, 
+    quantity: number,
+    price: number, 
     user_id: number
 }
