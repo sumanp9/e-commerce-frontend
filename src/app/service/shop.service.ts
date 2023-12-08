@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable} from 'rxjs';
 import {Categories, PersonInterface, ProductInfo, TotalQuantity, Transaction, TransactionDetails, UserInfo} from '../shop-interface'
 import { CartDetailsResponse } from '../cart-interface';
@@ -27,7 +27,15 @@ export class ShopService {
   }
 
   users(): Observable<UserInfo[]>{
-    return this.http.get<UserInfo[]>(this.url+`users`);
+    const storedToken = localStorage.getItem('adminToken'); 
+    const token = storedToken?.replace(/^"(.*)"$/, '$1');
+    console.log("token" , token)
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    
+    console.log(this.url+`users`, {headers})
+    return this.http.get<UserInfo[]>(this.url+`users`, {headers});
   }
 
   products(): Observable<ProductInfo[]> {
@@ -99,11 +107,22 @@ export class ShopService {
   }
 
   transactions(): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(this.url+ `transactions`);
+    const storedToken = localStorage.getItem('adminToken'); 
+    const token = storedToken?.replace(/^"(.*)"$/, '$1');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    
+    return this.http.get<Transaction[]>(this.url+ `transactions`, {headers});
   }
   transactionDetails(id: string): Observable<TransactionDetails[]> {
+    const storedToken = localStorage.getItem('adminToken'); 
+    const token = storedToken?.replace(/^"(.*)"$/, '$1');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
     const params = new HttpParams().set('transaction_id', id.toString())
-    return this.http.get<TransactionDetails[]>(this.url+ 'transactionsDetails', {params})
+    return this.http.get<TransactionDetails[]>(this.url+ 'transactionsDetails', {params, headers})
   }
 
 }

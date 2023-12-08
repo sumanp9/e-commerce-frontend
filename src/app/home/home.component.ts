@@ -35,12 +35,15 @@ export class HomeComponent {
 
   signIn(): void{
     this.service.login(this.username, this.password).subscribe((res) => {
-     this.signedUser = res.user;
+     this.signedUser = res.userData.user;
+     const tkn = res.token;
      if(this.signedUser.role === 'Admin') {
       localStorage.setItem('signedUser', JSON.stringify(this.signedUser)); 
+      localStorage.setItem('adminToken', tkn);
       this.router.navigate(['/admin'],  {state:{data: this.signedUser}})
     } else {
       console.log('This is a User')
+      localStorage.setItem('userToken', tkn);
         this.userPage(this.signedUser);
      }
     });
@@ -49,14 +52,14 @@ export class HomeComponent {
 
   createAccount(): void{
     console.log("Create Account")
-    this.dialog.open(SignUpComponent, {disableClose: true,}).afterClosed().subscribe((result) => {
+    this.dialog.open(SignUpComponent, {disableClose: true}).afterClosed().subscribe((result) => {
       console.log("result it: "+  result)
     });
   }
 
   userPage(user: UserInfo): void {
     localStorage.setItem('signedUser', JSON.stringify(user)); 
-    this.router.navigate(['/product'] , {state: {data: user}})
+    this.router.navigate(['/product'] , {state: {data: user, token: localStorage.getItem('userToken')}})
   }
 
   togglePasswordVisibility(): void{

@@ -37,7 +37,6 @@ export class TransactionDetailsComponent implements OnInit{
   ngOnInit() {
     this.signedUser = history.state.data;
 
-    console.log(this.id)
     this.service.transactionDetails(this.id).subscribe((data: TransactionDetails[]) => {
       if(data) {
         console.log(data);
