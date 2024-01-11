@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PersonInterface, UserInfo } from '../shop-interface';
 import { ShopService } from '../service/shop.service';
 import { Router } from '@angular/router';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-password-verification',
@@ -60,23 +61,30 @@ export class PasswordVerificationComponent {
     } return false;
   }
 
-  signUp(){
-    if(this.verification()) {
-      this.user.password = this.password;
-      this.service.account(this.user).subscribe((res) => {
-        this.service.login(this.user.user_name, this.user.password).subscribe(res => {
-          if(res) {
-            this.newUser = res.user;
-            if(this.newUser.role === 'User') {
-              localStorage.setItem('signedUser', JSON.stringify(this.newUser)); 
-              this.router.navigate(['/product'],  {state:{data: this.newUser}})
-            } else {
-              console.log(this.newUser.name, this.newUser.role)
-            }
-          }
-        })
-      });
-     
-    }
-  }
+  async signUp(){
+    this.service.account(this.user).pipe(
+      switchMap((accountResponse) => {
+        if (accountResponse) {
+          // If account is successful, proceed to login
+          return this.service.login(this.user.user_name, this.user.password);
+        } else {
+          // Handle the case where account creation failed
+          return of(null);
+        }
+      })
+    ).subscribe((loginResponse) => {
+      if (loginResponse) {
+        // Process the login response
+        console.log(loginResponse)
+        this.newUser = loginResponse.userData.user;
+        if (this.newUser.role === 'User') {
+          localStorage.setItem('signedUser', JSON.stringify(this.newUser)); 
+          this.router.navigate(['/product'], { state: { data: this.newUser } });
+        } else {
+          console.log(this.newUser.name, this.newUser.role);
+        }
+      }
+    });
+    
+}
 }
