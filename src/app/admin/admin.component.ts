@@ -29,8 +29,6 @@ export class AdminComponent {
   transactionList: Transaction[] = [];
   dataSource: any;
 
-
-
   displayedColumns: string[] = ['Charge Id', 'User', 'Total']
 
   displayUsers = false;
