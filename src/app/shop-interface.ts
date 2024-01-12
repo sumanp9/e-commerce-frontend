@@ -22,7 +22,8 @@ export interface ProductInfo{
     details:string, 
     price: number,
     quantity: number
-    category_id: number
+    category_id: number,
+    rating: number
 }
 
 export interface Categories{

@@ -33,7 +33,8 @@ export class ProductDetailComponent {
     details: '',
     price: -1,
     quantity: -1,
-    category_id: -1
+    category_id: -1,
+    rating: 0
   }
 
   constructor(

@@ -20,7 +20,8 @@ export class AddProductComponent {
     details:'',
     price: 0,
     quantity:0,
-    category_id: -1
+    category_id: -1,
+    rating: 0
 
   }
 
