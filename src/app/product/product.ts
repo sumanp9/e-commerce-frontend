@@ -27,6 +27,7 @@ export class Product {
 
 
   cartQuantity = 0;
+  rating =0;
 
   constructor(
     private router: Router,
