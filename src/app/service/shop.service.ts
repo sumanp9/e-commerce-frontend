@@ -10,7 +10,7 @@ import { CartDetailsResponse } from '../cart-interface';
 })
 export class ShopService {
 
-  private url = `http://localhost:8080/`;
+  private url = `http://3.129.42.120:8080/`;
 
 
   constructor(private http: HttpClient) { }
